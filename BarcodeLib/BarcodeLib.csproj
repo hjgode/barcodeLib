@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{54E6787C-32B4-40EF-9FBD-21B63727C379}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BarcodeLib</RootNamespace>
+    <AssemblyName>BarcodeLib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BarcodeCommon.cs" />
+    <Compile Include="BarcodeLib.cs" />
+    <Compile Include="BarcodeXML.Designer.cs" />
+    <Compile Include="IBarcode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Symbologies\Blank.cs" />
+    <Compile Include="Symbologies\Codabar.cs" />
+    <Compile Include="Symbologies\Code11.cs" />
+    <Compile Include="Symbologies\Code128.cs" />
+    <Compile Include="Symbologies\Code39.cs" />
+    <Compile Include="Symbologies\Code93.cs" />
+    <Compile Include="Symbologies\EAN13.cs" />
+    <Compile Include="Symbologies\EAN8.cs" />
+    <Compile Include="Symbologies\FIM.cs" />
+    <Compile Include="Symbologies\Interleaved2of5.cs" />
+    <Compile Include="Symbologies\ISBN.cs" />
+    <Compile Include="Symbologies\ITF14.cs" />
+    <Compile Include="Symbologies\JAN13.cs" />
+    <Compile Include="Symbologies\MSI.cs" />
+    <Compile Include="Symbologies\Pharmacode.cs" />
+    <Compile Include="Symbologies\Postnet.cs" />
+    <Compile Include="Symbologies\Standard2of5.cs" />
+    <Compile Include="Symbologies\Telepen.cs" />
+    <Compile Include="Symbologies\UPCA.cs" />
+    <Compile Include="Symbologies\UPCE.cs" />
+    <Compile Include="Symbologies\UPCSupplement2.cs" />
+    <Compile Include="Symbologies\UPCSupplement5.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BarcodeXML.xsc">
+      <DependentUpon>BarcodeXML.xsd</DependentUpon>
+    </None>
+    <None Include="BarcodeXML.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BarcodeXML1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BarcodeXML.xss">
+      <DependentUpon>BarcodeXML.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
