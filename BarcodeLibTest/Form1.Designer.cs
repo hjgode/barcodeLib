@@ -28,7 +28,6 @@ namespace BarcodeLibTest
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.barcode = new System.Windows.Forms.PictureBox();
             this.txtEncoded = new System.Windows.Forms.TextBox();
             this.txtData = new System.Windows.Forms.TextBox();
@@ -203,6 +202,7 @@ namespace BarcodeLibTest
             this.chkGenerateLabel.TabIndex = 40;
             this.chkGenerateLabel.Text = "Generate label";
             this.chkGenerateLabel.UseVisualStyleBackColor = true;
+            this.chkGenerateLabel.CheckedChanged += new System.EventHandler(this.chkGenerateLabel_CheckedChanged);
             // 
             // label5
             // 
@@ -343,7 +343,6 @@ namespace BarcodeLibTest
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Barcode Encoder";

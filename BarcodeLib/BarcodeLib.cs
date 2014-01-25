@@ -427,9 +427,9 @@ namespace BarcodeLib
             this.Raw_Data = ibarcode.RawData;
 
             _Encoded_Image = (Image)Generate_Image();
-
+#if ! PocketPC
             this.EncodedImage.RotateFlip(this.RotateFlipType);
-
+#endif
             _XML = GetXML();
 
             this.EncodingTime = ((TimeSpan)(DateTime.Now - dtStartTime)).TotalMilliseconds;
@@ -475,25 +475,45 @@ namespace BarcodeLib
                             //lines are fBarWidth wide so draw the appropriate color line vertically
                             using (Pen pen = new Pen(ForeColor, iBarWidth))
                             {
+#if ! PocketPC
                                 pen.Alignment = PenAlignment.Right;
-
+#endif
                                 while (pos < Encoded_Value.Length)
                                 {
                                     //draw the appropriate color line vertically
                                     if (Encoded_Value[pos] == '1')
+#if ! PocketPC
                                         g.DrawLine(pen, new Point((pos * iBarWidth) + shiftAdjustment + bearerwidth + iquietzone, 0), new Point((pos * iBarWidth) + shiftAdjustment + bearerwidth + iquietzone, Height));
-
+#else
+                                        g.DrawLine(pen, (pos * iBarWidth) + shiftAdjustment + bearerwidth + iquietzone, 0,
+                                            (pos * iBarWidth) + shiftAdjustment + bearerwidth + iquietzone, Height);
+#endif
                                     pos++;
                                 }//while
 
                                 //bearer bars
                                 pen.Width = (float)b.Height / 8;
                                 pen.Color = ForeColor;
+#if ! PocketPC
                                 pen.Alignment = PenAlignment.Center;
                                 g.DrawLine(pen, new Point(0, 0), new Point(b.Width, 0));//top
                                 g.DrawLine(pen, new Point(0, b.Height), new Point(b.Width, b.Height));//bottom
                                 g.DrawLine(pen, new Point(0, 0), new Point(0, b.Height));//left
                                 g.DrawLine(pen, new Point(b.Width, 0), new Point(b.Width, b.Height));//right
+#else
+                                Point myP1, myP2;
+                                myP1 = new Point(0, 0);
+                                myP2= new Point(b.Width, 0);
+                                g.DrawLine(pen, myP1.X,myP1.Y,myP2.X,myP2.Y);//top
+                                myP1=new Point(0, b.Height);
+                                myP2=new Point(b.Width, b.Height);
+                                g.DrawLine(pen, myP1.X, myP1.Y, myP2.X, myP2.Y);//bottom
+                                myP1=new Point(0, 0); myP2=new Point(0, b.Height);
+                                g.DrawLine(pen, myP1.X, myP1.Y, myP2.X, myP2.Y);//left
+                                myP1=new Point(b.Width, 0);
+                                myP2=new Point(b.Width, b.Height);
+                                g.DrawLine(pen, myP1.X, myP1.Y, myP2.X, myP2.Y);//right
+#endif
                             }//using
                         }//using
 
@@ -547,14 +567,20 @@ namespace BarcodeLib
                                         {
                                             //draw half bars in postnet
                                             if (Encoded_Value[pos] != '1')
-                                                g.DrawLine(pen, new Point(pos * iBarWidth + shiftAdjustment + 1, Height), new Point(pos * iBarWidth + shiftAdjustment + 1, Height / 2));
+                                                g.DrawLine(pen, 
+                                                    pos * iBarWidth + shiftAdjustment + 1, Height, 
+                                                    pos * iBarWidth + shiftAdjustment + 1, Height / 2);
                                             
                                             //draw spaces between bars in postnet
-                                            g.DrawLine(backpen, new Point(pos * (iBarWidth * iBarWidthModifier) + shiftAdjustment + iBarWidth + 1, 0), new Point(pos * (iBarWidth * iBarWidthModifier) + shiftAdjustment + iBarWidth + 1, Height));
+                                            g.DrawLine(backpen, 
+                                                pos * (iBarWidth * iBarWidthModifier) + shiftAdjustment + iBarWidth + 1, 0,
+                                                pos * (iBarWidth * iBarWidthModifier) + shiftAdjustment + iBarWidth + 1, Height);
                                         }//if
 
                                         if (Encoded_Value[pos] == '1')
-                                            g.DrawLine(pen, new Point(pos * iBarWidth + shiftAdjustment + (int)(iBarWidth * 0.5), 0), new Point(pos * iBarWidth + shiftAdjustment + (int)(iBarWidth * 0.5), Height));
+                                            g.DrawLine(pen, 
+                                                pos * iBarWidth + shiftAdjustment + (int)(iBarWidth * 0.5), 0, 
+                                                pos * iBarWidth + shiftAdjustment + (int)(iBarWidth * 0.5), Height);
 
                                         pos++;
                                     }//while
@@ -626,7 +652,9 @@ namespace BarcodeLib
                         case SaveTypes.GIF: imageformat = System.Drawing.Imaging.ImageFormat.Gif; break;
                         case SaveTypes.JPG: imageformat = System.Drawing.Imaging.ImageFormat.Jpeg; break;
                         case SaveTypes.PNG: imageformat = System.Drawing.Imaging.ImageFormat.Png; break;
+#if ! PocketPC
                         case SaveTypes.TIFF: imageformat = System.Drawing.Imaging.ImageFormat.Tiff; break;
+#endif
                         default: imageformat = ImageFormat; break;
                     }//switch
                     ((Bitmap)_Encoded_Image).Save(Filename, imageformat);
@@ -655,7 +683,9 @@ namespace BarcodeLib
                         case SaveTypes.GIF: imageformat = System.Drawing.Imaging.ImageFormat.Gif; break;
                         case SaveTypes.JPG: imageformat = System.Drawing.Imaging.ImageFormat.Jpeg; break;
                         case SaveTypes.PNG: imageformat = System.Drawing.Imaging.ImageFormat.Png; break;
+#if ! PocketPC
                         case SaveTypes.TIFF: imageformat = System.Drawing.Imaging.ImageFormat.Tiff; break;
+#endif
                         default: imageformat = ImageFormat; break;
                     }//switch
                     ((Bitmap)_Encoded_Image).Save(stream, imageformat);
@@ -704,26 +734,31 @@ namespace BarcodeLib
 
                 using (Graphics g = Graphics.FromImage(img))
                 {
-                    g.DrawImage(img, (float)0, (float)0);
-
+                    g.DrawImage(img, (int)0, (int)0);
+#if ! PocketPC
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
                     g.CompositingQuality = CompositingQuality.HighQuality;
-
+#endif
                     //color a white box at the bottom of the barcode to hold the string of data
-                    g.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(0, img.Height - (font.Height - 2), img.Width, font.Height));
+                    g.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(0, img.Height - ((int)font.Size - 2), img.Width, (int)font.Size));
 
                     //draw datastring under the barcode image
                     StringFormat f = new StringFormat();
                     f.Alignment = StringAlignment.Center;
-                    g.DrawString(this.RawData, font, new SolidBrush(this.ForeColor), (float)(img.Width / 2), img.Height - font.Height + 1, f);
+                    g.DrawString(this.RawData, font, new SolidBrush(this.ForeColor), (float)(img.Width / 2), img.Height - font.Size + 1, f);
 
                     Pen pen = new Pen(ForeColor, (float)img.Height / 16);
+#if ! PocketPC
                     pen.Alignment = PenAlignment.Inset;
-                    g.DrawLine(pen, new Point(0, img.Height - font.Height - 2), new Point(img.Width, img.Height - font.Height - 2));//bottom
+#endif
+                    g.DrawLine(pen, 0, (int)(img.Height - font.Size - 2), 
+                        img.Width, (int)(img.Height - font.Size - 2));//bottom
 
+#if ! PocketPC
                     g.Save();
+#endif
                 }//using
                 return img;
             }//try
@@ -740,13 +775,13 @@ namespace BarcodeLib
 
                 using (Graphics g = Graphics.FromImage(img))
                 {
-                    g.DrawImage(img, (float)0, (float)0);
-
+                    g.DrawImage(img, (int)0, (int)0);
+#if ! PocketPC
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
                     g.CompositingQuality = CompositingQuality.HighQuality;
-
+#endif
                     StringFormat f = new StringFormat();
                     f.Alignment = StringAlignment.Near;
                     f.LineAlignment = StringAlignment.Near;
@@ -757,17 +792,17 @@ namespace BarcodeLib
                     {
                         case LabelPositions.BOTTOMCENTER:
                             LabelX = img.Width / 2;
-                            LabelY = img.Height - (font.Height);
+                            LabelY = img.Height - ((int)font.Size);
                             f.Alignment = StringAlignment.Center;
                             break;
                         case LabelPositions.BOTTOMLEFT:
                             LabelX = 0;
-                            LabelY = img.Height - (font.Height);
+                            LabelY = img.Height - ((int)font.Size);
                             f.Alignment = StringAlignment.Near;
                             break;
                         case LabelPositions.BOTTOMRIGHT:
                             LabelX = img.Width;
-                            LabelY = img.Height - (font.Height);
+                            LabelY = img.Height - ((int)font.Size);
                             f.Alignment = StringAlignment.Far;
                             break;
                         case LabelPositions.TOPCENTER:
@@ -788,12 +823,17 @@ namespace BarcodeLib
                     }//switch
                     
                     //color a background color box at the bottom of the barcode to hold the string of data
-                    g.FillRectangle(new SolidBrush(this.BackColor), new RectangleF((float)0, (float)LabelY, (float)img.Width, (float)font.Height));
-
+#if ! PocketPC
+                    g.FillRectangle(new SolidBrush(this.BackColor), new RectangleF((float)0, (float)LabelY, (float)img.Width, (float)(int)font.Size));
+#else
+                    g.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(0, LabelY, img.Width, (int)font.Size));
+#endif
                     //draw datastring under the barcode image
-                    g.DrawString(this.RawData, font, new SolidBrush(this.ForeColor), new RectangleF((float)0, (float)LabelY, (float)img.Width, (float)font.Height), f);
+                    g.DrawString(this.RawData, font, new SolidBrush(this.ForeColor), new RectangleF((float)0, (float)LabelY, (float)img.Width, (float)(int)font.Size), f);
 
+#if ! PocketPC
                     g.Save();
+#endif
                 }//using
                 return img;
             }//try
@@ -827,24 +867,28 @@ namespace BarcodeLib
                     default: shiftAdjustment = (Width % Encoded_Value.Length) / 2;
                         break;
                 }//switch
-
+#if ! PocketPC
                 System.Drawing.Font font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0))); ;
-
+#else
+                System.Drawing.Font font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold);
+#endif
                 using (Graphics g = Graphics.FromImage(img))
                 {
-                    g.DrawImage(img, (float)0, (float)0);
-
+                    g.DrawImage(img, (int)0, (int)0);
+#if ! PocketPC
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
                     g.CompositingQuality = CompositingQuality.HighQuality;
-
+#endif
                     //draw datastring under the barcode image
                     RectangleF rect = new RectangleF((iBarWidth * 3) + shiftAdjustment, this.Height - (int)(this.Height * 0.1), (iBarWidth * 43), (int)(this.Height * 0.1));
-                    g.FillRectangle(new SolidBrush(Color.Yellow), rect.X, rect.Y, rect.Width, rect.Height);
+                    g.FillRectangle(new SolidBrush(Color.Yellow), (int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
                     g.DrawString(this.RawData.Substring(1, 5), font, new SolidBrush(this.ForeColor), rect.X, rect.Y);
 
+#if ! PocketPC
                     g.Save();
+#endif
                 }//using
                 return img;
             }//try
@@ -859,6 +903,9 @@ namespace BarcodeLib
         #region Misc
         private string GetXML()
         {
+#if PocketPC
+            return "not implemented";
+#else
             if (EncodedValue == "")
                 throw new Exception("EGETXML-1: Could not retrieve XML due to the barcode not being encoded first.  Please call Encode first.");
             else
@@ -903,7 +950,9 @@ namespace BarcodeLib
                     throw new Exception("EGETXML-2: " + ex.Message);
                 }//catch
             }//else
+#endif
         }
+#if ! PocketPC
         public static Image GetImageFromXML(BarcodeXML internalXML)
         {
             try
@@ -922,6 +971,7 @@ namespace BarcodeLib
                 throw new Exception("EGETIMAGEFROMXML-1: " + ex.Message);
             }//catch
         }
+#endif
         #endregion
 
         #region Static Methods

@@ -40,7 +40,7 @@ namespace BarcodeLib.Symbologies
         {
             int num;
 
-            if (!Int32.TryParse(Raw_Data, out num))
+            if (!myInt32.TryParse(Raw_Data, out num))
             {
                 Error("EPHARM-3: Input is unparseable.");
             }

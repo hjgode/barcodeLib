@@ -73,7 +73,7 @@ namespace BarcodeLib.Symbologies
             }//foreach
 
             //remove the extra 0 at the end of the result
-            result = result.Remove(result.Length - 1);
+            result = result.Substring(0, result.Length - 1);
 
             //clears the hashtable so it no longer takes up memory
             this.Codabar_Code.Clear();

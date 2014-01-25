@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeLib", "BarcodeLib\Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeLibTest", "BarcodeLibTest\BarcodeLibTest.csproj", "{282E00EB-5F5D-43F4-ADA9-C6053F547032}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeLibCF", "BarcodeLibCF\BarcodeLibCF.csproj", "{B78596FF-D531-4F37-9D23-C0F1A9B024D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeLibTestCF", "BarcodeLibTestCF\BarcodeLibTestCF.csproj", "{85291498-2455-4B30-81D2-BDF2787E6114}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,16 @@ Global
 		{282E00EB-5F5D-43F4-ADA9-C6053F547032}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{282E00EB-5F5D-43F4-ADA9-C6053F547032}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{282E00EB-5F5D-43F4-ADA9-C6053F547032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B78596FF-D531-4F37-9D23-C0F1A9B024D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B78596FF-D531-4F37-9D23-C0F1A9B024D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B78596FF-D531-4F37-9D23-C0F1A9B024D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B78596FF-D531-4F37-9D23-C0F1A9B024D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85291498-2455-4B30-81D2-BDF2787E6114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85291498-2455-4B30-81D2-BDF2787E6114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85291498-2455-4B30-81D2-BDF2787E6114}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{85291498-2455-4B30-81D2-BDF2787E6114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85291498-2455-4B30-81D2-BDF2787E6114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85291498-2455-4B30-81D2-BDF2787E6114}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

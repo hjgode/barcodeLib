@@ -12,15 +12,16 @@
 
 namespace BarcodeLib {
     
-    
+#if ! PocketPC    
     /// <summary>
     ///Represents a strongly typed in-memory cache of data.
     ///</summary>
     [global::System.Serializable()]
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
     [global::System.Xml.Serialization.XmlRootAttribute("BarcodeXML")]
+
+    [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class BarcodeXML : global::System.Data.DataSet {
         
@@ -1250,6 +1251,7 @@ namespace BarcodeLib {
             }
         }
     }
+#endif
 }
 
 #pragma warning restore 1591

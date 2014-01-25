@@ -35,7 +35,7 @@ namespace BarcodeLib
             long value = 0;
             if (Data != null)
             {
-                if (Int64.TryParse(Data, out value))
+                if (myInt64.TryParse(Data, out value))
                     return true;
             }
             else
@@ -63,7 +63,7 @@ namespace BarcodeLib
 
             foreach (string s in strings)
             {
-                if (!Int64.TryParse(s, out value))
+                if (!myInt64.TryParse(s, out value))
                     return false;
             }//foreach
 
