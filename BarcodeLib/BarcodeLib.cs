@@ -741,20 +741,21 @@ namespace BarcodeLib
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
                     g.CompositingQuality = CompositingQuality.HighQuality;
 #endif
+                    int fSize = (int)(font.Size * 1.5); //we do not have Font.Height in CF
                     //color a white box at the bottom of the barcode to hold the string of data
-                    g.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(0, img.Height - ((int)font.Size - 2), img.Width, (int)font.Size));
+                    g.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(0, img.Height - ((int)fSize), img.Width, fSize));
 
                     //draw datastring under the barcode image
                     StringFormat f = new StringFormat();
                     f.Alignment = StringAlignment.Center;
-                    g.DrawString(this.RawData, font, new SolidBrush(this.ForeColor), (float)(img.Width / 2), img.Height - font.Size + 1, f);
+                    g.DrawString(this.RawData, font, new SolidBrush(this.ForeColor), (float)(img.Width / 2), img.Height - fSize + 1, f);
 
                     Pen pen = new Pen(ForeColor, (float)img.Height / 16);
 #if ! PocketPC
                     pen.Alignment = PenAlignment.Inset;
 #endif
-                    g.DrawLine(pen, 0, (int)(img.Height - font.Size - 2), 
-                        img.Width, (int)(img.Height - font.Size - 2));//bottom
+                    g.DrawLine(pen, 0, (int)(img.Height - fSize), 
+                        img.Width, (int)(img.Height - fSize));//bottom
 
 #if ! PocketPC
                     g.Save();
@@ -787,22 +788,23 @@ namespace BarcodeLib
                     f.LineAlignment = StringAlignment.Near;
                     int LabelX = 0;
                     int LabelY = 0;
+                    int fSize = (int)(font.Size * 1.5); //we do not have Font.Height in CF
 
                     switch (LabelPosition)
                     {
                         case LabelPositions.BOTTOMCENTER:
                             LabelX = img.Width / 2;
-                            LabelY = img.Height - ((int)font.Size);
+                            LabelY = img.Height - ((int)fSize);
                             f.Alignment = StringAlignment.Center;
                             break;
                         case LabelPositions.BOTTOMLEFT:
                             LabelX = 0;
-                            LabelY = img.Height - ((int)font.Size);
+                            LabelY = img.Height - ((int)fSize);
                             f.Alignment = StringAlignment.Near;
                             break;
                         case LabelPositions.BOTTOMRIGHT:
                             LabelX = img.Width;
-                            LabelY = img.Height - ((int)font.Size);
+                            LabelY = img.Height - ((int)fSize);
                             f.Alignment = StringAlignment.Far;
                             break;
                         case LabelPositions.TOPCENTER:
@@ -824,12 +826,12 @@ namespace BarcodeLib
                     
                     //color a background color box at the bottom of the barcode to hold the string of data
 #if ! PocketPC
-                    g.FillRectangle(new SolidBrush(this.BackColor), new RectangleF((float)0, (float)LabelY, (float)img.Width, (float)(int)font.Size));
+                    g.FillRectangle(new SolidBrush(this.BackColor), new RectangleF((float)0, (float)LabelY, (float)img.Width, (float)(int)fSize));
 #else
-                    g.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(0, LabelY, img.Width, (int)font.Size));
+                    g.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(0, LabelY, img.Width, (int)fSize));
 #endif
                     //draw datastring under the barcode image
-                    g.DrawString(this.RawData, font, new SolidBrush(this.ForeColor), new RectangleF((float)0, (float)LabelY, (float)img.Width, (float)(int)font.Size), f);
+                    g.DrawString(this.RawData, font, new SolidBrush(this.ForeColor), new RectangleF((float)0, (float)LabelY, (float)img.Width, (float)(int)fSize), f);
 
 #if ! PocketPC
                     g.Save();

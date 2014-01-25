@@ -56,7 +56,7 @@
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.Size = new System.Drawing.Size(91, 21);
             this.txtHeight.TabIndex = 61;
-            this.txtHeight.Text = "150";
+            this.txtHeight.Text = "60";
             // 
             // txtWidth
             // 
@@ -64,7 +64,7 @@
             this.txtWidth.Name = "txtWidth";
             this.txtWidth.Size = new System.Drawing.Size(90, 21);
             this.txtWidth.TabIndex = 60;
-            this.txtWidth.Text = "300";
+            this.txtWidth.Text = "200";
             // 
             // label6
             // 
@@ -209,7 +209,8 @@
             // 
             this.barcode.Location = new System.Drawing.Point(6, 112);
             this.barcode.Name = "barcode";
-            this.barcode.Size = new System.Drawing.Size(214, 59);
+            this.barcode.Size = new System.Drawing.Size(214, 70);
+            this.barcode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             // 
             // Form1
             // 
@@ -236,8 +237,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtEncoded);
             this.Menu = this.mainMenu1;
+            this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "BarcodeLibCF Test";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

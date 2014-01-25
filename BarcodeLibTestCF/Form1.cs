@@ -71,14 +71,14 @@ namespace BarcodeLibTestCF
                     barcode.Width = barcode.Image.Width;
                     barcode.Height = barcode.Image.Height;
 
-                    tsslEncodedType.Text = "Encoding Type: " + b.EncodedType.ToString();
+                    //tsslEncodedType.Text = "Encoding Type: " + b.EncodedType.ToString();
                 }//if
 
                 barcode.Width = barcode.Image.Width;
                 barcode.Height = barcode.Image.Height;
 
                 //reposition the barcode image to the middle
-                barcode.Location = new Point((this.groupBox2.Location.X + this.groupBox2.Width / 2) - barcode.Width / 2, (this.groupBox2.Location.Y + this.groupBox2.Height / 2) - barcode.Height / 2);
+                //barcode.Location = new Point((this.groupBox2.Location.X + this.groupBox2.Width / 2) - barcode.Width / 2, (this.groupBox2.Location.Y + this.groupBox2.Height / 2) - barcode.Height / 2);
 
             }//try
             catch (Exception ex)
