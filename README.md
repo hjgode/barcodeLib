@@ -1,7 +1,7 @@
 barcodeLib
 ==========
 
-modded barcodeLib by Brad Barnhill (http://www.codeproject.com/Articles/20823/Barcode-Image-Generation-Library)
+this is a snapshot of barcodeLib by Brad Barnhill ported to CF, see  (http://www.codeproject.com/Articles/20823/Barcode-Image-Generation-Library)
 
 see my blog at http://www.hjgode.de/wp/2014/01/25/mobile-development-barcodelib-again-ported-to-compact-framework/
 and
